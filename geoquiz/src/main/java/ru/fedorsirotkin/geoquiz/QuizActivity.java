@@ -7,8 +7,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 public class QuizActivity extends Activity {
+
+    private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX = "index";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -28,7 +32,25 @@ public class QuizActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "Метод onCreate(Bundle) вызван");
+
         setContentView(R.layout.activity_quiz);
+
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+        }
+
+        // Регистрация сообщения с уровнем отладки "debug"
+        Log.d(TAG, "Текущий индекс вопроса: " + mCurrentIndex);
+        Question question;
+        try {
+            question = mQuestionBank[mCurrentIndex];
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            // Регистрация сообщения с уровнем отладки "error"
+            // вместе с трассировкой стека исключений
+            Log.e(TAG, "Индекс вышел за пределы: ", ex);
+        }
 
         // Получение ссылок на виджеты
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -76,11 +98,51 @@ public class QuizActivity extends Activity {
         });
     }
 
+    // Переопределение методов жизненного цикла
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "Метод onStart() вызван");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "Метод onResume() вызван");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "Метод onPause() вызван");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(TAG, "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "Метод onStop() вызван");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "Метод onDestroy() вызван");
+    }
+
+    // Обновляет вопрос
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
 
+    // Проверяет ответ и выводит уведомление
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
