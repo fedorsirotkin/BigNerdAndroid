@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
-    <string name="question_text">Москва столица России?</string>
     <string name="true_button">Да</string>
     <string name="false_button">Нет</string>
     <string name="correct_toast">Верно!</string>
     <string name="incorrect_toast">Неверно!</string>
+    <string name="next_button">Дальше</string>
+    <string name="question_australia">Канберра является столицей Австралии.</string>
+    <string name="question_oceans">Тихий океан больше Атлантического океана.</string>
+    <string name="question_mideast">Суэцкий канал соединяет Красное море и Индийский океан.</string>
+    <string name="question_africa">Исток реки Нил находится в Египте.</string>
+    <string name="question_americas">Река Амазонка самая длинная река в Америке.</string>
+    <string name="question_asia">Байкал - самое старое и глубокое пресноводное озеро в мире.</string>
 </resources>
