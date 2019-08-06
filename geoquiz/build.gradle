@@ -1,15 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    // minSdkVersion <= targetSdkVersion == compileSdkVersion (latest SDK)
+
+    // Версия API, с которой компилируется приложение
     compileSdkVersion 28
+
+    // Используемая аерсия компилятора
     buildToolsVersion '28.0.3'
 
 
     defaultConfig {
+        // ИД приложения
         applicationId "ru.fedorsirotkin.geoquiz"
+        // Нижняя граница, за которой ОС отказывается устанавливать приложение
         minSdkVersion 19
+        // Для какого API проектируется приложение (обычно это новейшая версия)
         targetSdkVersion 28
+        // Целочисленная версия
         versionCode 1
+        // Версия приложения в строковом формате
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,6 +40,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.+'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:multidex:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
