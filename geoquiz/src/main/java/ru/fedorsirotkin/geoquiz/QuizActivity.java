@@ -138,6 +138,8 @@ public class QuizActivity extends Activity {
 
     // Обновляет вопрос
     private void updateQuestion() {
+        Log.d(TAG, "Обновление текста вопроса", new Exception());
+
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
